@@ -1,0 +1,77 @@
+{
+    "Description": "",
+    "Snippets": {
+        "experiments_test#doublelookupblankenv.go": {
+            "GistID": "8b97c4203ad0dcdc2c5326eb4958377e",
+            "GistURL": "https://gist.github.com/8b97c4203ad0dcdc2c5326eb4958377e",
+            "Line": 40,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#doublelookupblankenv.go",
+            "Name": "doublelookupblankenv",
+            "Content": "func BenchmarkDoubleLookupBlankEnv(b *testing.B) {\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\t\tenv, ok := os.LookupEnv(\"Not_Available\")\n\t\tif ok {\n\t\t\toutput = env\n\t\t} else {\n\t\t\toutput = s.hostname\n\t\t}\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        },
+        "experiments_test#doublelookupvalidenv.go": {
+            "GistID": "aa5bf29f9df9daac9579c7c2cd8457dd",
+            "GistURL": "https://gist.github.com/aa5bf29f9df9daac9579c7c2cd8457dd",
+            "Line": 61,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#doublelookupvalidenv.go",
+            "Name": "doublelookupvalidenv",
+            "Content": "func BenchmarkDoubleLookupValidEnv(b *testing.B) {\n\terr := os.Setenv(\"GO_TEST_VAR\", \"ENV-Potatoes\")\n\tif err != nil {\n\t\tb.Logf(\"Failed to set env var. Error: %s\", err)\n\t\tb.Fail()\n\t}\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\t\tenv, ok := os.LookupEnv(\"GO_TEST_VAR\")\n\t\tif ok {\n\t\t\toutput = env\n\t\t} else {\n\t\t\toutput = s.hostname\n\t\t}\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        },
+        "experiments_test#envlookup.go": {
+            "GistID": "1e021e776adfe46fffba697eb5094135",
+            "GistURL": "https://gist.github.com/1e021e776adfe46fffba697eb5094135",
+            "Line": 8,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#envlookup.go",
+            "Name": "envlookup",
+            "Content": "func BenchmarkEnvLookup(b *testing.B) {\n\terr := os.Setenv(\"GO_TEST_VAR\", \"ENV-Potatoes\")\n\tif err != nil {\n\t\tb.Logf(\"Failed to set env var. Error: %s\", err)\n\t\tb.Fail()\n\t}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\t\toutput = os.Getenv(\"GO_TEST_VAR\")\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        },
+        "experiments_test#lenlookup.go": {
+            "GistID": "d7a5d7ca5eee93e8fa96ac1dfdf3029b",
+            "GistURL": "https://gist.github.com/d7a5d7ca5eee93e8fa96ac1dfdf3029b",
+            "Line": 149,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#lenlookup.go",
+            "Name": "lenlookup",
+            "Content": "func BenchmarkLenLookup(b *testing.B) {\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\n\tvar output int\n\tfor i := 0; i \u003c b.N; i++ {\n\t\tif len(s.hostname) \u003e 1 {\n\t\t\toutput = 1\n\t\t}\n\t}\n\tb.Logf(\"using output: %d\", output)\n}"
+        },
+        "experiments_test#stringlookup.go": {
+            "GistID": "4c2c905627be1ffee33d32b1ec76818c",
+            "GistURL": "https://gist.github.com/4c2c905627be1ffee33d32b1ec76818c",
+            "Line": 168,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#stringlookup.go",
+            "Name": "stringlookup",
+            "Content": "func BenchmarkStringLookup(b *testing.B) {\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\n\tvar output int\n\tfor i := 0; i \u003c b.N; i++ {\n\t\tif s.hostname != \"\" {\n\t\t\toutput = 1\n\t\t}\n\t}\n\tb.Logf(\"using output: %d\", output)\n}"
+        },
+        "experiments_test#structlookup.go": {
+            "GistID": "15c1f06992fd964f6d49c3186c14e835",
+            "GistURL": "https://gist.github.com/15c1f06992fd964f6d49c3186c14e835",
+            "Line": 24,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#structlookup.go",
+            "Name": "structlookup",
+            "Content": "func BenchmarkStructLookup(b *testing.B) {\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\t\toutput = s.hostname\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        },
+        "experiments_test#useenv.go": {
+            "GistID": "f05a052938b8b68e7fca6e71b8d2e936",
+            "GistURL": "https://gist.github.com/f05a052938b8b68e7fca6e71b8d2e936",
+            "Line": 119,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#useenv.go",
+            "Name": "useenv",
+            "Content": "func BenchmarkUseEnv(b *testing.B) {\n\terr := os.Setenv(\"GO_TEST_VAR\", \"ENV-Potatoes\")\n\tif err != nil {\n\t\tb.Logf(\"Failed to set env var. Error: %s\", err)\n\t\tb.Fail()\n\t}\n\ts := struct {\n\t\thostname string\n\t}{}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\n\t\t// This returns false in this test\n\t\tif s.hostname != \"\" {\n\t\t\toutput = s.hostname\n\t\t\tcontinue\n\t\t}\n\n\t\t// We now reach this code\n\t\tenv, ok := os.LookupEnv(\"GO_TEST_VAR\")\n\t\tif !ok {\n\t\t\toutput = env\n\t\t}\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        },
+        "experiments_test#usestruct.go": {
+            "GistID": "43bc3bf1d33a9fad383a903be9865f68",
+            "GistURL": "https://gist.github.com/43bc3bf1d33a9fad383a903be9865f68",
+            "Line": 87,
+            "File": "experiments_test.go",
+            "Path": "experiments_test#usestruct.go",
+            "Name": "usestruct",
+            "Content": "func BenchmarkUseStruct(b *testing.B) {\n\terr := os.Setenv(\"GO_TEST_VAR\", \"ENV-Potatoes\")\n\tif err != nil {\n\t\tb.Logf(\"Failed to set env var. Error: %s\", err)\n\t\tb.Fail()\n\t}\n\ts := struct {\n\t\thostname string\n\t}{\n\t\thostname: \"STRUCT-Potatoes\",\n\t}\n\tvar output string\n\tfor i := 0; i \u003c b.N; i++ {\n\t\tif s.hostname != \"\" {\n\t\t\toutput = s.hostname\n\t\t\tcontinue\n\t\t}\n\n\t\t// We don't reach this in this test\n\t\tenv, ok := os.LookupEnv(\"Not_Available\")\n\t\tif !ok {\n\t\t\toutput = env\n\t\t} else {\n\t\t\toutput = s.hostname\n\t\t}\n\t}\n\tb.Logf(\"got output: %s\", output)\n}"
+        }
+    }
+}
